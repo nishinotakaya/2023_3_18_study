@@ -19,4 +19,25 @@ if Rails.env == 'development'
     {name: 'python3'},
     {name: 'python4'}
   ])
+
+  User.create([
+    {name: 'takay',
+    password: 'password'
+  },
+    {name: 'kazuya',
+    password: 'password'
+  },
+    {name: 'tsutomu',
+    password: 'password'
+  },
+    {name: 'kida',
+    password: 'password'
+  },
+    {name: 'yamada',
+    password: 'password'
+  },
+    {name: 'komatsu',
+    password: 'password'
+  }
+  ])
 end
