@@ -13,7 +13,7 @@ if Rails.env == 'development'
 
   Tag.create([
     {name: 'Ruby'},
-    {name: 'ruby on rails'},
+    {name: 'Ruby on Rails'},
     {name: 'Python'},
     {name: 'python2'},
     {name: 'python3'},
@@ -21,22 +21,22 @@ if Rails.env == 'development'
   ])
 
   User.create([
-    {name: 'takay',
+    {name: 'takaya',
     password: 'password'
   },
     {name: 'kazuya',
     password: 'password'
   },
-    {name: 'tsutomu',
+    {name: 'takashi',
     password: 'password'
   },
     {name: 'kida',
     password: 'password'
   },
-    {name: 'yamada',
+    {name: 'tetsu',
     password: 'password'
   },
-    {name: 'komatsu',
+    {name: 'tanaka',
     password: 'password'
   }
   ])
