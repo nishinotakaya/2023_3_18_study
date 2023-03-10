@@ -11,7 +11,7 @@
 #
 class Board < ApplicationRecord
   has_many :comments, dependent: :delete_all
-  has_many :board_tag_relations, dependent: :delete_all #delete_allの方が良い！
+  has_many :board_tag_relations, dependent: :delete_all
   has_many :tags, through: :board_tag_relations
 
   validates :name, presence: true, length: { maximum: 10 }

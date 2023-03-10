@@ -10,45 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_26_025119) do
-
-  create_table "board_tag_relations", force: :cascade do |t|
-    t.integer "board_id", null: false
-    t.integer "tag_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+ActiveRecord::Schema[7.0].define(version: 2021_08_26_025119) do
+  create_table "board_tag_relations", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "board_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["board_id"], name: "index_board_tag_relations_on_board_id"
     t.index ["tag_id"], name: "index_board_tag_relations_on_tag_id"
   end
 
-  create_table "boards", force: :cascade do |t|
+  create_table "boards", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "title"
     t.text "body"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.integer "board_id", null: false
+  create_table "comments", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "board_id", null: false
     t.string "name", null: false
     t.text "comment", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["board_id"], name: "index_comments_on_board_id"
   end
 
-  create_table "tags", force: :cascade do |t|
+  create_table "tags", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "password_digest", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
