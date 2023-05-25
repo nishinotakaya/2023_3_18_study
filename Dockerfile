@@ -12,10 +12,29 @@ RUN mkdir -p /var/lib/mysql
 # 公式→https://hub.docker.com/_/ruby
 
 # Rails 7ではWebpackerが標準では組み込まれなくなったので、yarnやnodejsのインストールが不要
+# Chromeをインストール
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
 
+# ChromeDriverをインストール
+RUN wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip
+RUN unzip chromedriver_linux64.zip
+RUN mv chromedriver /usr/bin/chromedriver
+RUN chown root:root /usr/bin/chromedriver
+RUN chmod +x /usr/bin/chromedriver
 # ruby3.1のイメージがBundler version 2.3.7で失敗するので、gemのバージョンを追記
 ARG RUBYGEMS_VERSION=3.3.20
 
+RUN CHROME_DRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` && \
+    wget -N http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -P ~/ && \
+    unzip ~/chromedriver_linux64.zip -d ~/ && \
+    rm ~/chromedriver_linux64.zip && \
+    chown root:root ~/chromedriver && \
+    chmod 755 ~/chromedriver && \
+    mv ~/chromedriver /usr/local/bin/chromedriver && \
+    sh -c 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -' && \
+    sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' && \
+    apt-get update && apt-get install -y google-chrome-stable
 # RUN：任意のコマンド実行
 RUN mkdir /app
 
