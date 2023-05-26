@@ -23,16 +23,6 @@ if Rails.env == 'development'
     end
   end
 
-  Tag.create([
-    {name: 'Ruby'},
-    {name: 'Ruby on Rails'},
-    {name: 'Python'},
-    {name: 'python2'},
-    {name: 'python3'},
-    {name: 'python4'},
-    {name: 'その他'},
-  ])
-
   User.create([
     {name: 'takaya',
     password: 'password'
