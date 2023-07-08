@@ -98,6 +98,9 @@ bin/docker/bundle/exec rails db:migrate
 bin/docker/bundle/exec rails db:seed
 ```
 
+# webpackerエラー
+docker-compose run --rm web rails webpacker:install
+
 ---
 
 ## ※※※※※※※PR 上げる前に確認してください※※※※※※※
@@ -148,7 +151,14 @@ docker-compose exec db mysql -u root -p
 # rspec(全部実行)
 bin/docker/bundle/exec rspec
 
+<<<<<<< Updated upstream
  docker-compose run --rm web bundle exec rspec
+=======
+docker-compose run web bundle exec rspec
+
+# rspec(個別実行):例 spec/models/article_spec.rbの17行目
+bin/docker/bundle/exec rspec spec/models/article_spec.rb:17
+>>>>>>> Stashed changes
 ```
 
 ---
