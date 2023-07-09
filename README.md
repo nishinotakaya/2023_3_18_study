@@ -32,13 +32,13 @@
 docker-compose build
 
 # bundle intall
-docker-compose run --rm web bundle install
+docker-compose run --rm app bundle install
 
 # yarn install
-docker-compose run --rm web yarn install
+docker-compose run --rm app yarn install
 
 # db:setup
-docker-compose run --rm web rails db:setup
+docker-compose run --rm app rails db:setup
 
 # railsサーバー起動(ローカルPC用)
 bin/dev
@@ -63,12 +63,12 @@ docker ps -a
 
 ## loader のエラー解消
 
-docker-compose run --rm web npm install --save-dev pug pug-plain-loader
-docker-compose run --rm web npm install --save-dev sass sass-loader@10
+docker-compose run --rm app npm install --save-dev pug pug-plain-loader
+docker-compose run --rm app npm install --save-dev sass sass-loader@10
 
 ## webpacer のインストール
 
-docker-compose run --rm web rails webpacker:install
+docker-compose run --rm app rails webpacker:install
 
 ## 開発コマンド
 
@@ -98,8 +98,9 @@ bin/docker/bundle/exec rails db:migrate
 bin/docker/bundle/exec rails db:seed
 ```
 
-# webpackerエラー
-docker-compose run --rm web rails webpacker:install
+# webpacker エラー
+
+docker-compose run --rm app rails webpacker:install
 
 ---
 
@@ -139,7 +140,7 @@ https://wa3.i-3-i.info/word13606.html
 
 ## DB を My SQL を指定して rails new する
 
-docker-compose run web rails new . --force --database=mysql --skip-bundle
+docker-compose run app rails new . --force --database=mysql --skip-bundle
 
 ## Docker で My SQL 立ち上げ
 
@@ -151,14 +152,7 @@ docker-compose exec db mysql -u root -p
 # rspec(全部実行)
 bin/docker/bundle/exec rspec
 
-<<<<<<< Updated upstream
- docker-compose run --rm web bundle exec rspec
-=======
-docker-compose run web bundle exec rspec
-
-# rspec(個別実行):例 spec/models/article_spec.rbの17行目
-bin/docker/bundle/exec rspec spec/models/article_spec.rb:17
->>>>>>> Stashed changes
+ docker-compose run --rm app bundle exec rspec
 ```
 
 ---

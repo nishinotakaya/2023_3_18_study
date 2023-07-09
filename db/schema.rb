@@ -46,6 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2021_08_26_025119) do
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "password_digest", null: false
+    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_users_on_name", unique: true

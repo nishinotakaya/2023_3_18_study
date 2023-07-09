@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id              :bigint           not null, primary key
+#  email           :string(255)
 #  name            :string(255)      not null
 #  password_digest :string(255)      not null
 #  created_at      :datetime         not null
@@ -23,6 +24,8 @@ class User < ApplicationRecord
     with: /\A[a-z0-9]+\z/,
     message: 'は小文字英数字で入力してください'
   }
+
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   validates :password,
     presence: true,
