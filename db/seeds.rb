@@ -7,22 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 if Rails.env == 'development'
-  (1..15).each do |i|
-    if i == 1
-      Board.create(name: "名無しのゴンベイ", title: "プログラミング", body: "つら楽しいwwwwwwww")
-    elsif i == 2
-      Board.create(name: "どっかの介護士", title: "勤怠A", body: "わけ分からん！😓")
-    elsif i == 3
-      Board.create(name: "にっしー", title: "街コン", body: "今日も惨敗")
-    elsif i == 4
-      Board.create(name: "貴O", title: "ダイエット", body: "３３日継続！！！！")
-    elsif i == 5
-      Board.create(name: "にしO", title: "恋愛について", body: "１０００円のコンサル受けてきたぜい！")
-    else
-      Board.create(name: "受講生#{i}", title: "目指せフリーランスエンジニア", body: "目指せ月収#{i}0万円")
-    end
-  end
-
   User.create([
     {name: 'takaya',
     password: 'password'
@@ -43,4 +27,20 @@ if Rails.env == 'development'
     password: 'password'
   }
   ])
+  (1..15).each do |i|
+    if i == 1
+      Board.create(name: "名無しのゴンベイ", title: "プログラミング", body: "つら楽しいwwwwwwww", user_id: 1)
+    elsif i == 2
+      Board.create(name: "どっかの介護士", title: "勤怠A", body: "わけ分からん！😓", user_id: 2)
+    elsif i == 3
+      Board.create(name: "にっしー", title: "街コン", body: "今日も惨敗" , user_id: 1)
+    elsif i == 4
+      Board.create(name: "貴O", title: "ダイエット", body: "３３日継続！！！！", user_id: 3)
+    elsif i == 5
+      Board.create(name: "にしO", title: "恋愛について", body: "１０００円のコンサル受けてきたぜい！", user_id: 3)
+    else
+      Board.create(name: "受講生#{i}", title: "目指せフリーランスエンジニア", body: "目指せ月収#{i}0万円", user_id: 2)
+    end
+  end
+
 end

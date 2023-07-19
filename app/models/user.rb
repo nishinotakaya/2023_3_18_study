@@ -25,7 +25,9 @@ class User < ApplicationRecord
   #   message: 'は小文字英数字で入力してください'
   # }
 
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  has_many :boards
+
+  # validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   validates :password,
     presence: true,

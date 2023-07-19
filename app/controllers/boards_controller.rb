@@ -55,7 +55,7 @@ private
   end  
 
   def boards_params
-    params.require(:board).permit(:name, :title, :body, tag_ids: [])
-  end
+    params.require(:board).permit(:name, :title, :body, tag_ids: []).merge(user_id: current_user.id)
+  end  
 
 end
