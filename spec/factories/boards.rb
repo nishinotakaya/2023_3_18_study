@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :board do
-		name { "HIKAKIN" }
-    title { "Ruby" }
-    body { "aaaaaaaaaaxxxxxxxx" }
-  end
+   sequence(:name) { |n| "NAME #{n}"}
+   sequence(:title) { |n| "TEST TITLE #{n}"}
+   sequence(:body) { |n| "TEST BODY #{n}"}
+   association :user
+ end
 end
