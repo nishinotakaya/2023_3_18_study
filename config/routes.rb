@@ -2,7 +2,7 @@
 #
 
 Rails.application.routes.draw do
-resources :users, only: %i[new create]
+resources :users, only: %i[new create index show]
 # get 'users/me'
 get 'mypage', to: 'users#me'
 post 'login', to: 'sessions#create'
