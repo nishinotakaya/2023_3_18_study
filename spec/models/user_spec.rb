@@ -22,6 +22,14 @@ RSpec.describe User, type: :model do
     @user = create(:user)
   end
 
+  describe '.addition' do
+    context '1+1'
+    it '2になること' do
+      user = User.new
+      expect(user.addition).to eq 2
+    end
+  end
+
   describe 'バリデーション' do
     context 'emailとemailとpasswordどちらも値が設定されている場合' do
       it 'バリデーションが通る' do

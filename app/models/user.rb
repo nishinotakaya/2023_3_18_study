@@ -32,4 +32,9 @@ class User < ApplicationRecord
   validates :password,
     presence: true,
     length: { minimum: 8 }
+  
+  
+  def addition
+    1 + 1
+  end
 end

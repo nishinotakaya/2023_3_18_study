@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    # 引っ掛けでやってみる
     @user = User.find(params[:id])
   end
 

@@ -1,4 +1,6 @@
 RSpec.describe UsersController, type: :controller do
+
+  # 問題3
   before do
     @user = create(:user)
   end
@@ -12,14 +14,13 @@ RSpec.describe UsersController, type: :controller do
   describe 'GET #show' do
     context '該当のユーザーが表示される場合' do
       before do
-        @user = create(:user)
         get :show, params: { id: @user.id } # @userのidが含まれるpathにリクエストを送信します。
       end
   
       it '200 httpレスポンスを返す' do
         expect(response.status).to eq 200
       end
-  
+
       it '該当のユーザーが表示される' do
         expect(assigns(:user)).to eq @user
       end
