@@ -1,60 +1,26 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe 'Boards', type: :system do
-
-	# describe "掲示板に遷移" do
-	# 	let!(:user) { FactoryBot.create(:user) }
-	# 	let!(:board) { FactoryBot.create(:board) }
-	
-	# 	context 'ユーザーがログインする' do
-	# 		before do
-	# 			visit root_path
-	# 			fill_in 'session_name', with: user.name
-	# 			fill_in 'session_password', with: user.password
-	# 			click_button 'ログイン'
-	# 		end
-
-	# 		it '掲示板一覧に遷移していること' do
-	# 			expect(page).to have_current_path(boards_path)
-	# 		end
-
-	# 		it '掲示板の作成者が表示されていること' do
-	# 			expect(page).to have_content board.name
-	# 		end
-
-	# 		it '掲示板のタイトル名が表示されていること' do
-	# 			expect(page).to have_content board.title
-	# 		end
-	# 	end
-	# end
-
-  describe '計算' do
-    context '12 + 6の場合' do
-      it '18 になること' do
-        expect(12 + 6).to eq 18
-      end
-      it '20にはならない' do
-        expect(12 + 6).not_to eq 20
-      end
-    end
+RSpec.describe "Boards", type: :request do
+  let(:user) { FactoryBot.create(:user) }
+  let!(:boards) { create_list(:board, 5, user: user) }
+  before do
+    user
+    boards
+  end
   
-    context '6 × 4の場合' do
-      it '24になること' do
-        expect(6 * 4).to eq 24
+  describe 'GET #index' do
+    context 'indexページに遷移する場合' do
+      before do
+        get boards_path
       end
-      it '30にはならない' do
-        expect(6 * 4).not_to eq 30
+
+      it "200 httpレスポンスを返す" do
+        expect(response.status).to eq 200
       end
-    end
-  
-    context '100 ÷ 20の場合' do
-      it '5になること' do
-        expect(100 / 20).to eq 5
-      end
-      it '6にはならない' do
-        expect(100 / 20).not_to eq 6
+
+      it "indexページが表示される" do
+        expect(response).to render_template :index
       end
     end
   end
-
 end
