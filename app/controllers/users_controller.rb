@@ -5,17 +5,17 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find.(params[:id])
+    @user = User.find(params[:id])
   end
 
   def new
-    @user = User.new(flash[:user]) #入力されたuser名が消えずに残る
+    @user = User.new(flash[:user])
   end
 
   def create
     user = User.new(user_params)
     if user.save
-      session[:user_id] = user.id #セッション情報のアクセスしてきたuserセッション情報を扱う特殊なキーuser.idを入れる
+      session[:user_id] = user.id
       redirect_to mypage_path
     else
       redirect_to new_user_url, flash: {
