@@ -54,4 +54,30 @@ RSpec.describe "Boards", type: :request do
       end
     end
   end
+
+  describe 'GET show' do
+    before do
+      user
+      board_1
+      get board_path(board_1), as: :json
+    end
+    
+    it "200httpレスポンスを返す" do
+      expect(response.status).to eq 200
+    end
+
+    it '指定された掲示板が返る' do
+      json_response = JSON.parse(response.body)
+      expected_data = {
+        'id' => board_1.id,
+        'name' => board_1.name,
+        'title' => board_1.title,
+        'body' => board_1.body,
+        'created_at' => board_1.created_at.as_json,
+        'updated_at' => board_1.updated_at.as_json,
+        'user_id' => board_1.user_id
+      }
+      expect(json_response).to eq(expected_data)
+    end
+  end
 end
