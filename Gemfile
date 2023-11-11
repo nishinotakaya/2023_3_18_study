@@ -52,6 +52,7 @@ group :development do
   gem 'hirb-unicode'
   gem 'pry-byebug'
   gem 'annotate'
+  gem 'rails-controller-testing' #この行を追加
 end
 
 group :test do
@@ -63,6 +64,7 @@ group :test do
   gem 'rails-flog', require: 'flog'
   gem 'rspec-rails'
   gem "factory_bot_rails"
+  gem 'pry-rails'
   gem 'faker'
   gem 'database_cleaner'
 end
