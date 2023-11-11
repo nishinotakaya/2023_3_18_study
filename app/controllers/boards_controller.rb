@@ -1,14 +1,14 @@
 class BoardsController < ApplicationController
 before_action :set_target_board, only: %i[show edit update destroy]
 
-def index
-  @boards = Board.all.page(params[:page])
+  def index
+    @boards = Board.all.page(params[:page])
 
-  respond_to do |format|
-    format.html
-    format.json { render json: @boards }
+    respond_to do |format|
+      format.html
+      format.json { render json: @boards }
+    end
   end
-end
 
 
   def new
@@ -66,5 +66,4 @@ private
   def boards_params
     params.require(:board).permit(:name, :title, :body, tag_ids: []).merge(user_id: current_user.id)
   end  
-
 end
