@@ -1,12 +1,22 @@
 class BoardsController < ApplicationController
 before_action :set_target_board, only: %i[show edit update destroy]
 
-  def index
-    @boards = Board.all.page(params[:page])
+def index
+  @boards = Board.all.page(params[:page])
+
+  respond_to do |format|
+    format.html
+    format.json { render json: @boards }
   end
+end
+
 
   def new
     @board = Board.new(flash[:board])
+    respond_to do |format|
+      format.html
+      format.json { render json: @board }
+    end
   end
 
   def create
