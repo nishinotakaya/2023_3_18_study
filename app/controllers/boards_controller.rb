@@ -11,8 +11,8 @@ before_action :set_target_board, only: %i[show edit update destroy]
   end
 
 
-  def new
-    @board = Board.new(flash[:board])
+  def show
+    @comment = Comment.new(board_id: @board.id)
     respond_to do |format|
       format.html
       format.json { render json: @board }
@@ -34,7 +34,10 @@ before_action :set_target_board, only: %i[show edit update destroy]
 
   def show
     @comment = Comment.new(board_id: @board.id) #書き直し@boardに紐づいたコメントに影響しない
-    # @comment = @board.comments.new #あたしく関連するコメントが作れる
+    respond_to do |format|
+      format.html
+      format.json { render json: @board }
+    end
   end
 
   def edit
