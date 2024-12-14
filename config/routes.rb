@@ -4,7 +4,7 @@
 Rails.application.routes.draw do
 resources :users, only: %i[new create index show]
 # get 'users/me'
-get 'mypage', to: 'users#me'
+get 'mypage', to: 'users#my_page'
 post 'login', to: 'sessions#create'
 delete 'login', to: 'sessions#destory'
   #⇑

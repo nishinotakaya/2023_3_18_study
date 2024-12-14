@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def me
+  def my_page
   end
 
   private
