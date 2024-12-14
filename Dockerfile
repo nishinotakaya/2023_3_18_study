@@ -1,45 +1,36 @@
 FROM ruby:3.1.3
 
-# Install Node.js
+# NodeとYarnをインストール（Webpacker利用時必要）
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get update && apt-get install -y nodejs
-
-# Install Yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update && apt-get install -y yarn
-RUN mkdir -p /var/lib/mysql
-# 公式→https://hub.docker.com/_/ruby
 
-# Rails 7ではWebpackerが標準では組み込まれなくなったので、yarnやnodejsのインストールが不要
-
-# ruby3.1のイメージがBundler version 2.3.7で失敗するので、gemのバージョンを追記
 ARG RUBYGEMS_VERSION=3.3.20
-
-# RUN：任意のコマンド実行
 RUN mkdir /app
-
-# WORKDIR：作業ディレクトリを指定
 WORKDIR /app
 
-# COPY：コピー元とコピー先を指定
-# ローカルのGemfileをコンテナ内の/app/Gemfileに
-COPY Gemfile /app/Gemfile
-
-COPY Gemfile.lock /app/Gemfile.lock
-
-# RubyGemsをアップデート
-RUN gem update --system ${RUBYGEMS_VERSION} && \
-    bundle install
+COPY Gemfile Gemfile.lock /app/
+RUN gem update --system ${RUBYGEMS_VERSION} && bundle install
 
 COPY . /app
 
-# コンテナ起動時に実行させるスクリプトを追加
+# グローバルにwebpackをインストール
+RUN yarn global add webpack webpack-cli
+# package.jsonがない場合は初期化
+RUN yarn init -y
+# 必要なパッケージをインストール
+RUN yarn add @rails/webpacker webpack webpack-cli
+
+# Webpackerのセットアップ
+RUN rails webpacker:install
+RUN yarn install --check-files
+RUN rails webpacker:compile
+
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 3001
 
-# CMD:コンテナ実行時、デフォルトで実行したいコマンド
-# Rails サーバ起動
+EXPOSE 3001
 CMD ["rails", "server", "-b", "0.0.0.0"]
